@@ -1,0 +1,9 @@
+#Directories
+virtual/
+
+
+#Fils
+.env
+.gitignore
+!.env.example
+!.gitignore.example
