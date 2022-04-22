@@ -41,7 +41,7 @@ class SpeechExtraction(Resource):
                 }
 
             #remove the coverted.wav for get more space in the server
-            os.remove(os.path.join(os.getenv('CONVERTED_AUDIO_PATH'), os.getenv('CONVERTED_AUDIO_FILE_NAME')))
+            os.remove(os.path.join("D:/rp_server_one/assets/converted_wav", "converted.wav"))
 
             #return the json object which is having converted speech
             return json.loads(json.dumps(value)), 200
