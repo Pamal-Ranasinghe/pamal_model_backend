@@ -1,6 +1,7 @@
 from flask_restful import Resource
 from loguru import logger
 from .wordsProcessModel import WordModel
+from .awsOperation import AwsOperation
 
 import speech_recognition as sr
 import moviepy.editor as mp
