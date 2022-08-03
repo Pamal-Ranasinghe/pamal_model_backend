@@ -32,9 +32,10 @@ class WordMapping:
                     print(str(self.filtered_sentence[i]) + extension)
                     bucket.download_file(str(self.filtered_sentence[i])+extension, 'D:/s3_tute/'+str(self.filtered_sentence[i])+extension)
 
-                for filename in glob.glob('D:/s3_tute/*.mp4'):
-                    clip = VideoFileClip(filename)
-                    clip_arr.append(clip)
+                for i in range(0, len(self.filtered_sentence)):
+                    with open('D:/s3_tute/' + str(self.filtered_sentence[i])+extension) as f:
+                        clip = VideoFileClip(f.name)
+                        clip_arr.append(clip)
 
                 final = concatenate_videoclips(clip_arr)
                 final.write_videofile("assets/final_video/final_out.mp4")
