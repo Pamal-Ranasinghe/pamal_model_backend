@@ -2,6 +2,7 @@ from flask_restful import Resource
 from loguru import logger
 from .wordsProcessModel import WordModel
 from .awsOperation import AwsOperation
+from flask import request, session
 
 import speech_recognition as sr
 import moviepy.editor as mp
@@ -16,11 +17,34 @@ class SpeechExtraction(Resource):
     # author: Pamal Ranasinghe
 
     def get(self):
-        try:
-            # Check the endpoint execution
-            logger.info("Speech Extraction - GET - hits")
+        # def update_record():
+        #     record = request.get_json()
+        #     user = User(name=record['name'], email=record['email']).save()
+        #     # user.save()
 
-            clip = mp.VideoFileClip(r"assets/sample_video.mov")
+        #     logger.info("object", user)
+
+        #     logger.info("record is inserted")
+
+        #     return {"message" : "ok"}
+
+        try:
+            
+            logger.info("Speech Extraction - GET - hits")
+            aws = AwsOperation()
+            s3_session = aws.s3_connector()
+            bucket = s3_session.Bucket('lecvideos')
+
+            # extension = '.mov'
+
+            record = request.get_json()
+            logger.info("record is downloaded")
+            logger.info(record['name'])
+            # bucket.download_file(record['name']+extension, 'D:/rp_server_one/assets/'+record['name']+extension)
+            bucket.download_file(record['name'], 'D:/rp_server_one/assets/'+record['name'])
+            # Check the endpoint execution
+
+            clip = mp.VideoFileClip(r"assets/"+record['name'])
             clip.audio.write_audiofile(r"assets/converted_wav/converted.wav")
             r = sr.Recognizer()
             audio = sr.AudioFile("assets/converted_wav/converted.wav")

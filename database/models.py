@@ -1,8 +1,25 @@
 from .db import db
 
-class User(db.Document):
+class Video(db.Document):
     name = db.StringField()
-    email = db.StringField()
+    link = db.StringField()
+
     def to_json(self):
         return {"name": self.name,
-                "email": self.email}
+                "link": self.link}
+
+
+class NormalVideo(db.Document):
+    normal_vid_name = db.StringField()
+    # link = db.StringField()
+
+    def to_json(self):
+        return {"name": self.normal_vid_name}
+
+# class Video(db.Document):
+#     name = db.StringField()
+#     link = db.FileField()
+
+#     def to_json(self):
+#         return {"name": self.name,
+#                 "link": self.video}

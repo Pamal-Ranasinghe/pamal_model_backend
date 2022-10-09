@@ -2,7 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_restful import Api
 from resources.routes import initialize_routes
-from database.models import User
+# clefrom database.models import User
 from database.db import initialize_db
 from loguru import logger
 import json
@@ -26,17 +26,17 @@ initialize_db(app)
 #                 "email": self.email}
 
 
-@app.route('/add', methods=['POST'])
-def update_record():
-    record = request.get_json()
-    user = User(name=record['name'], email=record['email']).save()
-    # user.save()
+# @app.route('/add', methods=['POST'])
+# def update_record():
+#     record = request.get_json()
+#     user = User(name=record['name'], email=record['email']).save()
+#     # user.save()
 
-    logger.info("object", user)
+#     logger.info("object", user)
 
-    logger.info("record is inserted")
+#     logger.info("record is inserted")
 
-    return {"message" : "ok"}
+#     return {"message" : "ok"}
 
 
 #Test route
