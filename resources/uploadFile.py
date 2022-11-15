@@ -20,14 +20,14 @@ class UploadFile(Resource):
 
             # s3_session.meta.client.upload_fileobj(str(request.files['file']), bucket, object_name)
             s3_session.meta.client.upload_fileobj(request.files['file'], "lecvideos", object_name)
-            # subtitle = GenerateSubtitle(object_name)
-            # subend = subtitle.generate_subtitle_aws()
+            subtitle = GenerateSubtitle(object_name)
+            subend = subtitle.generate_subtitle_aws()
             
             file_url = s3_session.meta.client.generate_presigned_url('get_object', Params = {'Bucket': 'lecvideos', 'Key': object_name}, ExpiresIn = 86400)
-            # subtitle_url = s3_session.meta.client.generate_presigned_url('get_object', Params = {'Bucket': 'pamalcodex', 'Key': "my-output-files/"+ object_name+"-job.srt"}, ExpiresIn = 86400)
+            subtitle_url = s3_session.meta.client.generate_presigned_url('get_object', Params = {'Bucket': 'pamalcodex', 'Key': "my-output-files/"+ object_name+"-job.srt"}, ExpiresIn = 86400)
             
             
-            video = NormalVideo(normal_vid_name=object_name, link = file_url, subtitle_link = "sample_link" ).save()
+            video = NormalVideo(normal_vid_name=object_name, link = file_url, subtitle_link = subtitle_url ).save()
 
             session['uploaded_video_file'] = object_name
 
