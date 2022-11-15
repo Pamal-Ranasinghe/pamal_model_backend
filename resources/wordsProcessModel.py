@@ -33,6 +33,7 @@ class WordModel:
             # Remove the stop words from the text
             from nltk.corpus import stopwords
             stop_words = set(stopwords.words(os.getenv('NORMAL_LANGUAGE')))
+            logger.info('Stop Words : ' ,stop_words)
             filtered_sentence = [w for w in para_tokenize if not w.lower() in stop_words]
             filtered_sentence = []
  

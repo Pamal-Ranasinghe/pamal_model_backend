@@ -3,8 +3,11 @@ from .speechExtraction import SpeechExtraction
 from .uploadFile import UploadFile
 from .translatedVideo import TranslatedVideos
 from .noramalVideo import LectureVideo
+# from .subtitleGeneration import SubtitleGeneration
+
 def initialize_routes(api):
     api.add_resource(SpeechExtraction, "/api/extraction")
     api.add_resource(UploadFile, "/api/upload_video")
     api.add_resource(TranslatedVideos, "/api/translate_video")
     api.add_resource(LectureVideo, "/api/normal_video")
+    # api.add_resource(SubtitleGeneration, "/api/subtitle_generation")

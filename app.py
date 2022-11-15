@@ -4,10 +4,14 @@ from flask_restful import Api
 from resources.routes import initialize_routes
 # clefrom database.models import User
 from database.db import initialize_db
+from flask_cors import CORS, cross_origin
 from loguru import logger
 import json
+# from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 api = Api(app)
 
 app.config['MONGODB_SETTINGS'] = {
@@ -49,4 +53,5 @@ initialize_routes(api)
 
 #Main function
 if __name__ == '__main__':
+    app.secret_key = "qwertyuiopoiuytrewq"
     app.run()

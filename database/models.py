@@ -11,10 +11,13 @@ class Video(db.Document):
 
 class NormalVideo(db.Document):
     normal_vid_name = db.StringField()
-    # link = db.StringField()
+    link = db.StringField()
+    subtitle_link = db.StringField()
 
     def to_json(self):
-        return {"name": self.normal_vid_name}
+        return {"name": self.normal_vid_name, 
+                "link": self.link,
+                "subtitle_link": self.subtitle_link}    
 
 # class Video(db.Document):
 #     name = db.StringField()

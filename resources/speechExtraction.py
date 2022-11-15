@@ -16,7 +16,7 @@ class SpeechExtraction(Resource):
     # return: json
     # author: Pamal Ranasinghe
 
-    def get(self):
+    def post(self):
         # def update_record():
         #     record = request.get_json()
         #     user = User(name=record['name'], email=record['email']).save()
@@ -31,6 +31,14 @@ class SpeechExtraction(Resource):
         try:
             
             logger.info("Speech Extraction - GET - hits")
+
+            dir_name = "D:/rp_server_one/assets/"
+            test = os.listdir(dir_name)
+
+            for item in test:
+                if item.endswith(".mov"):
+                    os.remove(os.path.join(dir_name, item))
+
             aws = AwsOperation()
             s3_session = aws.s3_connector()
             bucket = s3_session.Bucket('lecvideos')
@@ -67,6 +75,7 @@ class SpeechExtraction(Resource):
 
             #remove the coverted.wav for get more space in the server
             os.remove(os.path.join("D:/rp_server_one/assets/converted_wav", "converted.wav"))
+            
 
             #return the json object which is having converted speech
             return json.loads(json.dumps(value)), 200

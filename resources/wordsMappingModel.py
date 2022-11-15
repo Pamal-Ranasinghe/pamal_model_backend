@@ -1,3 +1,4 @@
+from flask import session
 from database.models import Video
 from .awsOperation import AwsOperation
 from moviepy.editor import *
@@ -41,6 +42,8 @@ class WordMapping:
                         clip_arr.append(clip)
                 
                 filename_upload =  ''.join((random.choice(string.ascii_lowercase) for x in range(10))) 
+                
+                # filename_upload = session['uploaded_video_file'].split('.')[0]
                 filename_upload = filename_upload + ".mp4"
 
                 final = concatenate_videoclips(clip_arr)
